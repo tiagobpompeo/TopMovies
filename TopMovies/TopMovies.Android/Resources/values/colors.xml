@@ -4,4 +4,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <!--Get colors from: http://www.materialpalette.com/-->
+    <color name="primary">#ff0000</color>
+    <color name="primaryDark">#3086D3</color>
+    <color name="accent">#003E71</color>
 </resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" 
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms" 
+             x:Class="TopMovies.Templates.MenuItemTemplate">
+    <ContentView.Content>
+        <Grid ColumnSpacing="12" Padding="10, 10, 0, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ffimageloadingsvg:SvgCachedImage 
+                Grid.Column="0"
+                Source="{Binding MenuItemType, Converter={StaticResource LocalMenuIconConverter}}"
+                WidthRequest="30" HeightRequest="30" VerticalOptions="Center"> 
+            </ffimageloadingsvg:SvgCachedImage>
+            <Label Grid.Column="1" Text="{Binding MenuText}" VerticalOptions="Center"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
