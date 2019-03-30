@@ -16,7 +16,7 @@ using Android.Media;
 namespace TopMovies.Droid
 {
     [Activity(Label = "Top Movies", Icon = "@mipmap/ic_launcher", Theme = "@style/SplashTheme",
-              MainLauncher = true)]
+              MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class SplashActivity:AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

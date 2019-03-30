@@ -3,6 +3,9 @@
     <assembly fullname="TopMovies">
         <type fullname="TopMovies.*" />
     </assembly>
+    <assembly fullname="Newtonsoft.Json">
+        <type fullname="Newtonsoft.Json.*" />
+    </assembly>
     <assembly fullname="Akavache.Sqlite3">
         <type fullname="Akavache.Sqlite3.*" />
     </assembly>

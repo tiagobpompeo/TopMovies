@@ -180,6 +180,7 @@ namespace TopMovies.Services.Navigation
             _mappings.Add(typeof(RegistrationViewModel), typeof(RegisterView));
             _mappings.Add(typeof(MenuViewModel), typeof(MenuView));
             _mappings.Add(typeof(HomeViewModel), typeof(HomeView));
+            _mappings.Add(typeof(MovieDetailViewModel), typeof(MovieDetailView));
         }
     }
 }

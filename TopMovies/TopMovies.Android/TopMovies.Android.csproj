@@ -97,6 +97,9 @@
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms">
       <Version>2.4.4.859</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling">
+      <Version>1.0.0-preview2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -139,6 +142,11 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable\play.png" />
+    <AndroidResource Include="Resources\drawable\list.png" />
+    <AndroidResource Include="Resources\drawable\search.png" />
+    <AndroidResource Include="Resources\drawable\share.png" />
+    <AndroidResource Include="Resources\drawable\movies_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

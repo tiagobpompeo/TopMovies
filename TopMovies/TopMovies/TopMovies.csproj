@@ -25,6 +25,7 @@
     <PackageReference Include="Acr.UserDialogs" Version="7.0.4" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.4.859" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.4.859" />
+    <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling" Version="1.0.0-preview2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bootstrap\" />
@@ -46,6 +47,8 @@
     <Folder Include="Models\Requests\" />
     <Folder Include="Enumerations\" />
     <Folder Include="Templates\" />
+    <Folder Include="Services\UpComing\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">

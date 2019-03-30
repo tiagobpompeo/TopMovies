@@ -10,6 +10,11 @@ namespace TopMovies.Views
         public HomeView()
         {
             InitializeComponent();
+
+            listView.ItemSelected += (sender, e) =>
+            {
+                ((ListView)sender).SelectedItem = null;
+            };
         }
     }
 }

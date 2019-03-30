@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="WhiteSmoke" 
+             x:Class="TopMovies.Views.MovieDetailView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="search" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="350" />
+                </Grid.RowDefinitions>
+                <ffimageloading:CachedImage 
+                    Grid.Row="0" 
+                    x:Name="imageMovie" 
+                    VerticalOptions="FillAndExpand" 
+                    Source="{Binding SelectedMovie.Backdrop_path,Converter={StaticResource BaseUrlImageBig}}"
+                    Aspect="AspectFit">
+                </ffimageloading:CachedImage>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

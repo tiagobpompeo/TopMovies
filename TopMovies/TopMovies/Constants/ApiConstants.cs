@@ -1,16 +1,15 @@
 ﻿using System;
 namespace TopMovies.Constants
 {
-    public class ApiConstants
+    public static class ApiConstants
     {
-        public const string BaseApiUrl = "http://192.168.1.35:5000/";
-        public const string CatalogEndpoint = "api/catalog/pies/";
-        public const string PiesOfTheWeekEndpoint = "api/catalog/piesoftheweek/";
-        public const string ShoppingCartEndpoint = "api/shoppingcart";
-        public const string AddShoppingCartItemEndpoint = "api/shoppingcart/";
-        public const string AddContactInfoEndpoint = "api/contact";
-        public const string PlaceOrderEndpoint = "api/order";
-        public const string RegisterEndpoint = "api/authentication/register";
-        public const string AuthenticateEndpoint = "api/authentication/authenticate";
+        public const string RegisterEndpoint = "";
+        public const string AuthenticateEndpoint = "";
+        public const string BaseApiUrl = "https://api.themoviedb.org/";
+        public const string UpComingEndpoint = "3/movie/upcoming";
+        public const string Api_key = "1f54bd990f1cdfb230adb312546d765d";
+        public const string EnUSLanguage = "en-us";
+        public const string UpComingEndPointComplete="https://api.themoviedb.org/3/movie/upcoming?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-us&page=";
+
     }
 }

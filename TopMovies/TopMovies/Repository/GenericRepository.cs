@@ -4,10 +4,9 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using TopMovies.Exceptions;
 using Newtonsoft.Json;
 using Polly;
-using TopMovies.Exceptions;
-
 
 namespace TopMovies.Repository
 {

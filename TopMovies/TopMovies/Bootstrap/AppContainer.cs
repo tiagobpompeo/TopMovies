@@ -6,6 +6,7 @@ using TopMovies.Services.Connection;
 using TopMovies.Services.Dialog;
 using TopMovies.Services.Navigation;
 using TopMovies.Services.Settings;
+using TopMovies.Services.UpComing;
 using TopMovies.ViewModels;
 
 namespace TopMovies.Bootstrap
@@ -24,9 +25,10 @@ namespace TopMovies.Bootstrap
             builder.RegisterType<LoginViewModel>();
             builder.RegisterType<MenuViewModel>();
             builder.RegisterType<RegistrationViewModel>();
+            builder.RegisterType<MovieDetailViewModel>();
 
             //services - data
-            //builder.RegisterType<ClubesService>().As<IClubeService>();
+            builder.RegisterType<UpComingService>().As<IUpComing>();
 
             //services - general
             builder.RegisterType<ConnectionService>().As<IConnectionService>();

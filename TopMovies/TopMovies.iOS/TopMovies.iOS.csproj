@@ -173,6 +173,9 @@
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
       <Version>2.4.4.859</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling">
+      <Version>1.0.0-preview2</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -189,6 +192,7 @@
     <BundleResource Include="Resources\hamburguer.png" />
     <BundleResource Include="Resources\icon.png" />
     <BundleResource Include="Resources\IconApp.png" />
+    <BundleResource Include="Resources\movies_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
