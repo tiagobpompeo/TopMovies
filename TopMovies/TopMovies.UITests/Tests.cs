@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using TopMovies.UITests.ViewModel;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
@@ -32,6 +33,13 @@ namespace TopMovies.UITests
             app.Screenshot("Welcome screen.");
 
             Assert.IsTrue(results.Any());
+        }
+
+        [Test]
+        public async void Movies_Not_Null_Test()
+        {
+            var vm = new HomeViewModelTest();
+            await vm.Movies_Not_Null_Test();
         }
     }
 }

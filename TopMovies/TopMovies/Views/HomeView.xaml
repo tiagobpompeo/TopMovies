@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:behaviors="clr-namespace:TopMovies.Behaviors;assembly=TopMovies" 
-             xmlns:local="clr-namespace:TopMovies" 
+             xmlns:local="clr-namespace:TopMovies"
+             xmlns:custom="clr-namespace:TopMovies.CustomControls" 
              Title="{Binding Title}" 
              BackgroundColor="WhiteSmoke"
              xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
@@ -19,13 +20,18 @@
     </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar Placeholder="Search items.." Text="{Binding SearchText}">
+            <!--<SearchBar 
+                   x:Name="SearchBarMovies"
+                   Placeholder="Search items.." 
+                   SearchCommand="{Binding SearchCommand}"  
+                   Text="{Binding SearchText, Mode=TwoWay}" 
+                   SearchCommandParameter="{Binding Text, Source={x:Reference SearchBarMovies}}">
                 <SearchBar.Behaviors>
                     <behaviors:EventToCommandBehavior 
                         EventName="TextChanged" 
-                        Command="{Binding SearchCommand}"/>
+                        Command="{Binding TextChangeInSearchCommand}"/>
                 </SearchBar.Behaviors>
-            </SearchBar>
+            </SearchBar>-->
             <ListView 
                x:Name="listView" 
                ItemsSource="{Binding Movies}"
@@ -49,7 +55,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid Padding="12">
-                                <Frame 
+                                <custom:FrameCustom 
                                    Padding="0" 
                                    VerticalOptions="Start"
                                    HasShadow="{OnPlatform Android=true, iOS=false}">
@@ -62,6 +68,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="100" />
                                             <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="25" />
                                         </Grid.ColumnDefinitions>
                                         <ffimageloading:CachedImage 
                                             Grid.Row="0"
@@ -71,35 +78,55 @@
                                             Aspect="Fill" 
                                             Grid.Column="0"
                                             Grid.RowSpan="3"
-                                            Source="{Binding Poster_path, Converter={StaticResource BaseUrlImageSmall}}"/>
+                                            Source="{Binding Poster_path, Converter={StaticResource BaseUrlImageSmall}}"
+                                        />
                                         <Label 
                                            x:Name="title" 
                                            Grid.Row="0" 
                                            Grid.Column="1"
+                                           Grid.ColumnSpan="2"
+                                           Margin="6,10,6,6" 
                                            Text="{Binding Title}" 
-                                           VerticalTextAlignment="End" 
-                                           HorizontalTextAlignment="Start" 
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Start"
+                                           LineBreakMode="TailTruncation" 
                                            Style="{StaticResource TitleStyle}"
-                                           FontAttributes="Bold" />
-                                        <Label 
-                                           Margin="6,0" 
-                                           x:Name="release" 
+                                           FontAttributes="Bold" 
+                                        />
+                                         <Label 
+                                           x:Name="genre"
+                                           Margin="6,6,6,6"
+                                           Text="{Binding Genre_ids,StringFormat='Genre : {0:N}',Converter={StaticResource GenresTextConverter}}"
                                            Grid.Row="1" 
                                            Grid.Column="1" 
-                                           Text="{Binding Release_date,StringFormat='{0:MMMM d, yyyy}'}}"
-                                           HorizontalTextAlignment="Start"
-                                           FontSize="Small" TextColor="Gray" 
-                                           FontAttributes="Bold" />
-                                        <Label 
-                                           x:Name="genre"
-                                           Text="{Binding GenreMain}" 
-                                           Grid.Row="2" 
-                                           Grid.Column="1" 
+                                           VerticalTextAlignment="End"
                                            HorizontalTextAlignment="Start" 
                                            FontSize="Small" TextColor="Gray" 
-                                           FontAttributes="Bold" />
+                                           FontAttributes="Bold" 
+                                        />
+                                        <Label 
+                                           Margin="6,0,6,10" 
+                                           x:Name="release"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Start"  
+                                           Grid.Row="2" 
+                                           Grid.Column="1" 
+                                           Text="{Binding Release_date,StringFormat='{0:MMMM d, yyyy}'}}"
+                                           FontSize="Small" TextColor="Gray" 
+                                           FontAttributes="Bold" 
+                                        />
+                                        <Image
+                                            Margin="0,6,6,0" 
+                                            Grid.Column="2"
+                                            Grid.Row="0" 
+                                            Grid.RowSpan="3"
+                                            Source="seta.png" 
+                                            HeightRequest="25" 
+                                            WidthRequest="25">
+                                       </Image>
+                                        
                                     </Grid>
-                                </Frame>
+                                </custom:FrameCustom>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -116,7 +143,8 @@
                             IsVisible="{Binding IsWorking}"
                             Color="{StaticResource Roxo}" 
                             VerticalOptions="Center" 
-                            HorizontalOptions="Center" />
+                            HorizontalOptions="Center" 
+                        />
                     </Grid>
                 </ListView.Footer>
             </ListView>

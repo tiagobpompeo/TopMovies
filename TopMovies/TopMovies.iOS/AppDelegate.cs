@@ -17,6 +17,7 @@ namespace TopMovies.iOS
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            //UINavigationBar.Appearance.BackgroundColor = new UIColor(245 / 255f, 246 / 255f, 247 / 255f, 1.0f);
             LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }

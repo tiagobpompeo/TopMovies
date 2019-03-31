@@ -19,6 +19,27 @@ namespace TopMovies.Views
         }
 
 
+        async void ShakeButton_Clicked(object sender, EventArgs e)
+        {
+            uint timeout = 50;
+            await Play.TranslateTo(-15, 0, timeout);
+            await Play.TranslateTo(15, 0, timeout);
+            await Play.TranslateTo(-10, 0, timeout);
+            await Play.TranslateTo(10, 0, timeout);
+            await Play.TranslateTo(-5, 0, timeout);
+            await Play.TranslateTo(5, 0, timeout);
+            Play.TranslationX = 0;
+
+
+            await imageMovie.TranslateTo(-15, 0, timeout);
+            await imageMovie.TranslateTo(15, 0, timeout);
+            await imageMovie.TranslateTo(-10, 0, timeout);
+            await imageMovie.TranslateTo(10, 0, timeout);
+            await imageMovie.TranslateTo(-5, 0, timeout);
+            await imageMovie.TranslateTo(5, 0, timeout);
+            imageMovie.TranslationX = 0;
+        }
+
         #region Methods
         protected override void OnSizeAllocated(double width, double height)
         {

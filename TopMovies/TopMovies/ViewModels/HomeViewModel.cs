@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TopMovies.Base.ViewModels;
+using TopMovies.Helpers;
 using TopMovies.Models;
 using TopMovies.Services.Connection;
 using TopMovies.Services.Details;
@@ -19,23 +21,28 @@ namespace TopMovies.ViewModels
     {
         #region Attributes
         private readonly IUpComing _upComingService;
-        private InfiniteScrollCollection<Movies.Result> _ItemsFiltered;
         public readonly ISettingsService _settingsService;
-        private IConnectionService _connectionService;
+        private IConnectionService _connectionService;//keep
         public int pageIndex = 0;
         public bool _isWorking;
         public string _searchText;
         public string _title;
-        public ICommand RefreshCommand { get; }
         private ObservableCollection<Movies.Result> _ItemsUnfiltered;
-        public InfiniteScrollCollection<Movies.Result> Movies { get; }
+        public InfiniteScrollCollection<Movies.Result> Movies { get; set; }
         public string _genreMain;
         public string genreOut;
         public string connectionMessage;
         private readonly IDetailMovie _detailMovie;
+        public bool isrefreshing;
         #endregion
 
         #region Properties
+        public bool IsRefreshing
+        {
+            get { return this.isrefreshing; }
+            set { SetValue(ref this.isrefreshing, value); }
+        }
+
         public string ConnectionMessage
         {
             get { return connectionMessage; }
@@ -55,6 +62,7 @@ namespace TopMovies.ViewModels
                 OnPropertyChanged();
             }
         }
+
         public string SearchText
         {
             get { return _searchText; }
@@ -88,7 +96,8 @@ namespace TopMovies.ViewModels
 
         #region Command
         public ICommand MovieTappedCommand => new Command<Movies.Result>(OnMovieTapped);
-        public ICommand SearchCommand { get; private set; }
+        public ICommand SearchCommand => new Command<string>(SearchMovie);
+        public ICommand TextChangeInSearchCommand { get; private set; }
         #endregion
 
         #region Constructor
@@ -99,12 +108,12 @@ namespace TopMovies.ViewModels
             _upComingService = upComingService;
             _detailMovie = detailMovie;
             _connectionService = connectionService;
-            SearchCommand = new Command(PerformSearch);
             Title = "Upcoming";
+            TextChangeInSearchCommand = new Command(PerformSearch);
 
             Movies = new InfiniteScrollCollection<Movies.Result>
             {
-                //scroll dispara esse evento
+                //scroll user action trigger this event
                 OnLoadMore = async () =>
                 {
                     var connection = await this._connectionService.CheckConnection();
@@ -118,16 +127,21 @@ namespace TopMovies.ViewModels
                         IsWorking = true;
                         pageIndex++;
                         var movies = await _upComingService.GetAllMoviesAsync(pageIndex);
-                        _ItemsUnfiltered = new ObservableCollection<Movies.Result>(movies);
+                        var count = movies.Count;
+                        _ItemsUnfiltered = new InfiniteScrollCollection<Movies.Result>(movies);
                         IsWorking = false;
                         return movies;
                     }
                 }
             };
 
-            Movies.LoadMoreAsync();
-        }
 
+            Movies.LoadMoreAsync();
+
+        }
+        #endregion
+
+        #region Methods
         private async void CheckConnection()
         {
             var connection = await this._connectionService.CheckConnection();
@@ -139,9 +153,6 @@ namespace TopMovies.ViewModels
             }
         }
 
-        #endregion
-
-        #region Methods
         private void OnMovieTapped(Movies.Result selectedMovie)
         {
             _navigationService.NavigateToAsync<MovieDetailViewModel>(selectedMovie);
@@ -154,16 +165,24 @@ namespace TopMovies.ViewModels
             }
             else
             {
-                _ItemsFiltered = new InfiniteScrollCollection<Movies.Result>(_ItemsUnfiltered.Where(i => (i is Movies.Result && (((Movies.Result)i)
-                                                 .Title.ToLower()
-                                                 .Contains(_searchText.ToLower())))));
+                Movies = new InfiniteScrollCollection<Movies.Result>(_ItemsUnfiltered.Where(i => (i is Movies.Result && (((Movies.Result)i)
+                 .Title.ToLower()
+                 .Contains(_searchText.ToLower())))));
             }
         }
 
-        public override async Task InitializeAsync(object data)
+        private void SearchMovie(string movieText)
         {
-
+            Movies = new InfiniteScrollCollection<Movies.Result>(_ItemsUnfiltered.Where(i => (i is Movies.Result && (((Movies.Result)i)
+                .Title.ToLower()
+                .Contains(movieText.ToLower())))));
         }
+
+        public override Task InitializeAsync(object data)
+        {
+            return base.InitializeAsync(data);
+        }
+
         #endregion
     }
 }

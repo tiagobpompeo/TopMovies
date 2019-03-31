@@ -140,6 +140,8 @@
             <converters:CountToVisibilityConverter x:Key="LocalCountToVisibilityConverter" />
             <converters:AddBaseUrlConverterImageSmall x:Key="BaseUrlImageSmall" />
             <converters:AddBaseUrlConverterImageBig x:Key="BaseUrlImageBig" />
+            <converters:GenresTextConverterOn x:Key="GenresTextConverter" />
+            
         </ResourceDictionary>
         
     </Application.Resources>

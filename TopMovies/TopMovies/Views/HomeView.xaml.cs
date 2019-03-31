@@ -11,6 +11,8 @@ namespace TopMovies.Views
         {
             InitializeComponent();
 
+          
+
             listView.ItemSelected += (sender, e) =>
             {
                 ((ListView)sender).SelectedItem = null;

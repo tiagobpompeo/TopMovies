@@ -17,7 +17,7 @@ namespace TopMovies.Models
         [JsonProperty(PropertyName = "total_results")]
         public int Total_results { get; set; }
         [JsonProperty(PropertyName = "dates")]
-        public Datess Dates { get; set; }
+        public DatesProp Dates { get; set; }
         [JsonProperty(PropertyName = "total_pages")]
         public int Total_pages { get; set; }
 
@@ -56,7 +56,7 @@ namespace TopMovies.Models
 
         }
 
-        public class Datess
+        public class DatesProp
         {
             [JsonProperty(PropertyName = "maximum")]
             public string Maximum { get; set; }

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using TopMovies.Base.ViewModels;
 using TopMovies.Models;
 using TopMovies.Services.Connection;
@@ -61,6 +63,11 @@ namespace TopMovies.ViewModels
         }
         #endregion
 
+        #region Commands
+        public ICommand AddListCommand => new Command(AddListTapped);
+        public ICommand LikeCommand => new Command(LikeTapped);
+        #endregion
+
 
         #region Constructor
         public MovieDetailViewModel(IConnectionService connectionService, INavigationService navigationService, IDialogService dialogService, IDetailMovie detailMovie)
@@ -94,6 +101,16 @@ namespace TopMovies.ViewModels
                 GenreMain = genre[0].Name + "  -  " + genre[1].Name + "  -  " + genre[2].Name;
             }
 
+        }
+
+        private void AddListTapped(object obj)
+        {
+            _dialogService.ShowToast("Movie Add List");
+        }
+
+        private void LikeTapped(object obj)
+        {
+            _dialogService.ShowToast("Liked");
         }
         #endregion
     }

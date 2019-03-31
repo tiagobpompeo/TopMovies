@@ -107,6 +107,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomRenderers\RoundedEntryRenderer.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
+    <Compile Include="CustomRenderers\ExtendedWebViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -147,6 +148,9 @@
     <AndroidResource Include="Resources\drawable\search.png" />
     <AndroidResource Include="Resources\drawable\share.png" />
     <AndroidResource Include="Resources\drawable\movies_icon.png" />
+    <AndroidResource Include="Resources\drawable\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable\rate.png" />
+    <AndroidResource Include="Resources\drawable\seta.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Akavache;
 using TopMovies.Constants;
 using TopMovies.Detail;
+using TopMovies.Helpers;
 using TopMovies.Models;
 using TopMovies.Repository;
 using TopMovies.Services.BaseChacheService;
@@ -22,7 +23,7 @@ namespace TopMovies.Services.UpComing
 
         public async Task<List<Movies.Result>> GetAllMoviesAsync(int page)
         {
-            List<Movies.Result> moviesFromCache = await GetFromCache<List<Movies.Result>>(CacheNameConstants.AllMovies);
+            List<Movies.Result> moviesFromCache = await GetFromCache<List<Movies.Result>>(page.ToString());
             if (moviesFromCache != null)//loaded from cache
             {
                 return moviesFromCache;
@@ -31,8 +32,9 @@ namespace TopMovies.Services.UpComing
             {
                 string uri = $"{ApiConstants.BaseApiUrl}upcoming?api_key={ApiConstants.Api_key}&language=en-us&page={page}";
                 var movies = await _genericRepository.GetAsync<Movies>(uri);
+                GeneralVar.TotalPages = movies.Total_pages;//count
                 var listMovies = movies.Results;
-                Cache.InsertObject(CacheNameConstants.AllMovies, listMovies, DateTimeOffset.Now.AddSeconds(20));
+                Cache.InsertObject(page.ToString(), listMovies, DateTimeOffset.Now.AddSeconds(20));
                 return listMovies;
             }      
         }

@@ -12,6 +12,8 @@ namespace TopMovies.Views
         public TopMoviesNavigationPage()
         {
             InitializeComponent();
+            //BarBackgroundColor = Color.FromHex("#602040");
+            //BarTextColor = Color.White;
         }
 
         public TopMoviesNavigationPage(Page root) : base(root)

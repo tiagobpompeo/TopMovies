@@ -1,16 +1,16 @@
 ﻿using System;
 using Android.Content;
-using Beasy;
-using Beasy.CustomControls;
-using Beasy.Droid;
-using Beasy.Droid.CustomRenderers;
+using TopMovies;
+using TopMovies.CustomControls;
+using TopMovies.Droid;
+using TopMovies.Droid.CustomRenderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using WebView = Android.Webkit.WebView;
 
 
 [assembly: ExportRenderer(typeof(ExtendedWebView), typeof(ExtendedWebViewRenderer))]
-namespace Beasy.Droid.CustomRenderers
+namespace TopMovies.Droid.CustomRenderers
 {
     public class ExtendedWebViewRenderer : WebViewRenderer
     {
@@ -41,7 +41,6 @@ namespace Beasy.Droid.CustomRenderers
             }
         }
 
-
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.WebView> e)
         {
             base.OnElementChanged(e);
@@ -52,10 +51,6 @@ namespace Beasy.Droid.CustomRenderers
             {
                 _webView.SetWebViewClient(new ExtendedWebViewClient());
             }
-
         }
-
-
-
     }
 }

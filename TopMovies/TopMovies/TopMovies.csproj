@@ -51,6 +51,7 @@
     <Folder Include="Extensions\" />
     <Folder Include="Services\Details\" />
     <Folder Include="Models\Detail\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">

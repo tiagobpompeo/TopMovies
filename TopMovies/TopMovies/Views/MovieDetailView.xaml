@@ -75,25 +75,29 @@
                             x:Name="Title"
                             HorizontalTextAlignment="Center"
                             Text="{Binding MovieDetail.Title}" 
-                            Style="{StaticResource DetailTitleStyle}" />
+                            Style="{StaticResource DetailTitleStyle}" 
+                          />
                           <Label 
-                            Grid.Row="0"
+                            Grid.Row="1"
                             Grid.Column="0"
                             x:Name="Release"
                             Text="{Binding MovieDetail.Release_date, Converter={StaticResource ReleaseDateConverter}}"
-                            Style="{StaticResource DurationTextStyle}" />
+                            Style="{StaticResource DurationTextStyle}" 
+                          />
                          <Label 
                             Grid.Row="1"
                             HorizontalTextAlignment="Center"
                             x:Name="Genres"
                             FontSize="14" 
                             Text="{Binding GenreMain}"
-                            Style="{StaticResource DetailTitleStyle}"/>
+                            Style="{StaticResource DetailTitleStyle}"
+                           />
                           <Label 
                             Grid.Row="2" 
                             x:Name="OverviewTitle"
                             Text="{Binding MovieDetail.Overview}"
-                            Style="{StaticResource OverviewStyle}" />
+                            Style="{StaticResource OverviewStyle}" 
+                          />
                           <Grid Grid.Row="3">
                              <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -110,15 +114,17 @@
                                     Command="{Binding AddListCommand}"
                                     HorizontalOptions="Center"
                                     Image="list" 
-                                    Style="{StaticResource PlayStyle}" />
+                                    Style="{StaticResource PlayStyle}" 
+                                 />
                                 <Image 
+                                    x:Name="Play"
                                     Margin="0,25,0,0" 
                                     Grid.Column="1"
                                     HorizontalOptions="Center"
                                     Source="play" 
                                     Style="{StaticResource PlayStyle}">
                                     <Image.GestureRecognizers>
-                                        <TapGestureRecognizer/>
+                                        <TapGestureRecognizer Tapped="ShakeButton_Clicked"/>
                                     </Image.GestureRecognizers>
                                 </Image>
                                 <Button 
@@ -128,7 +134,8 @@
                                     HorizontalOptions="Center"
                                     Image="rate" 
                                     Command="{Binding LikeCommand}"
-                                    Style="{StaticResource PlayStyle}"/>
+                                    Style="{StaticResource PlayStyle}"
+                                 />
                          </Grid> 
                 </Grid>
             </Grid>
