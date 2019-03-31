@@ -49,6 +49,8 @@
     <Folder Include="Templates\" />
     <Folder Include="Services\UpComing\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Services\Details\" />
+    <Folder Include="Models\Detail\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">

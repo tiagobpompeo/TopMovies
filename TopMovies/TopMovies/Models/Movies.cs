@@ -52,8 +52,8 @@ namespace TopMovies.Models
             [JsonProperty(PropertyName = "overview")]
             public string Overview { get; set; }
             [JsonProperty(PropertyName = "release_date")]
-            public string Release_date { get; set; }   
-                    
+            public DateTime Release_date { get; set; }
+
         }
 
         public class Datess

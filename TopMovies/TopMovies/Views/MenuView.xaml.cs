@@ -23,6 +23,11 @@ namespace TopMovies.Views
                 default:
                     break;
             }
+
+            list.ItemSelected += (sender, e) =>
+            {
+                ((ListView)sender).SelectedItem = null;
+            };
         }
     }
 }

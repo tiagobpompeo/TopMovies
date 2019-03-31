@@ -60,7 +60,7 @@ namespace TopMovies.ViewModels
         {
             MenuItems.Add(new MainMenuItem
             {
-                MenuText = "Página Inicial\"",
+                MenuText = "Upcoming",
                 ViewModelToLoad = typeof(MainViewModel),
                 MenuItemType = MenuItemType.MainPage
             });

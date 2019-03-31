@@ -26,7 +26,7 @@ namespace TopMovies.Services.Connection
                     return new ConnectionResponse
                     {
                         IsSuccess = false,
-                        Message = "Por favor, ligue suas configurações de internet.",
+                        Message = "Please turn on your internet settings.",
                     };
                 }
 
@@ -37,7 +37,7 @@ namespace TopMovies.Services.Connection
                     return new ConnectionResponse
                     {
                         IsSuccess = false,
-                        Message = "Verifique sua conexão com a rede.",
+                        Message = "Check your network connection.",
                     };
                 }
 

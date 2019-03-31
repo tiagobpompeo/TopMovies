@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TopMovies.Base.ViewModels;
-using TopMovies.Extensions;
 using TopMovies.Models;
 using TopMovies.Services.Connection;
+using TopMovies.Services.Details;
 using TopMovies.Services.Dialog;
 using TopMovies.Services.Navigation;
 using TopMovies.Services.Settings;
@@ -20,10 +18,10 @@ namespace TopMovies.ViewModels
     public class HomeViewModel : ViewModelBase
     {
         #region Attributes
-        private readonly INavigationService _navigationService;
-        private readonly IUpComing _upComingService;       
+        private readonly IUpComing _upComingService;
         private InfiniteScrollCollection<Movies.Result> _ItemsFiltered;
         public readonly ISettingsService _settingsService;
+        private IConnectionService _connectionService;
         public int pageIndex = 0;
         public bool _isWorking;
         public string _searchText;
@@ -31,9 +29,23 @@ namespace TopMovies.ViewModels
         public ICommand RefreshCommand { get; }
         private ObservableCollection<Movies.Result> _ItemsUnfiltered;
         public InfiniteScrollCollection<Movies.Result> Movies { get; }
+        public string _genreMain;
+        public string genreOut;
+        public string connectionMessage;
+        private readonly IDetailMovie _detailMovie;
         #endregion
 
         #region Properties
+        public string ConnectionMessage
+        {
+            get { return connectionMessage; }
+            set
+            {
+                connectionMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Title
         {
             get { return _title; }
@@ -62,6 +74,16 @@ namespace TopMovies.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public string GenreMain
+        {
+            get { return _genreMain; }
+            set
+            {
+                _genreMain = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Command
@@ -71,11 +93,12 @@ namespace TopMovies.ViewModels
 
         #region Constructor
         public HomeViewModel(IConnectionService connectionService, INavigationService navigationService,
-            IDialogService dialogService, IUpComing upComingService)
+            IDialogService dialogService, IUpComing upComingService, IDetailMovie detailMovie)
         : base(connectionService, navigationService, dialogService)
         {
             _upComingService = upComingService;
-            _navigationService = navigationService;
+            _detailMovie = detailMovie;
+            _connectionService = connectionService;
             SearchCommand = new Command(PerformSearch);
             Title = "Upcoming";
 
@@ -84,17 +107,38 @@ namespace TopMovies.ViewModels
                 //scroll dispara esse evento
                 OnLoadMore = async () =>
                 {
-                    IsWorking = true;
-                    pageIndex++;
-                    var movies = await _upComingService.GetAllMoviesAsync(pageIndex);
-                    _ItemsUnfiltered = new ObservableCollection<Movies.Result>(movies);
-                    IsWorking = false;
-                    return movies;
+                    var connection = await this._connectionService.CheckConnection();
+                    if (!connection.IsSuccess)
+                    {
+                        ConnectionMessage = connection.Message;
+                        return null;
+                    }
+                    else
+                    {
+                        IsWorking = true;
+                        pageIndex++;
+                        var movies = await _upComingService.GetAllMoviesAsync(pageIndex);
+                        _ItemsUnfiltered = new ObservableCollection<Movies.Result>(movies);
+                        IsWorking = false;
+                        return movies;
+                    }
                 }
             };
 
             Movies.LoadMoreAsync();
         }
+
+        private async void CheckConnection()
+        {
+            var connection = await this._connectionService.CheckConnection();
+
+            if (!connection.IsSuccess)
+            {
+                await Application.Current.MainPage.DisplayAlert("Conexão de Rede", connection.Message, "OK");
+                return;
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -114,6 +158,11 @@ namespace TopMovies.ViewModels
                                                  .Title.ToLower()
                                                  .Contains(_searchText.ToLower())))));
             }
+        }
+
+        public override async Task InitializeAsync(object data)
+        {
+
         }
         #endregion
     }

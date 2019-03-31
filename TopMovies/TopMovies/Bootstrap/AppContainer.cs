@@ -3,6 +3,7 @@ using Autofac;
 using TopMovies.Repository;
 using TopMovies.Services.Authentication;
 using TopMovies.Services.Connection;
+using TopMovies.Services.Details;
 using TopMovies.Services.Dialog;
 using TopMovies.Services.Navigation;
 using TopMovies.Services.Settings;
@@ -11,7 +12,7 @@ using TopMovies.ViewModels;
 
 namespace TopMovies.Bootstrap
 {
-    public class AppContainer
+    public static class AppContainer
     {
         private static IContainer _container;
 
@@ -29,10 +30,11 @@ namespace TopMovies.Bootstrap
 
             //services - data
             builder.RegisterType<UpComingService>().As<IUpComing>();
+            builder.RegisterType<MovieDetailService>().As<IDetailMovie>();
 
             //services - general
-            builder.RegisterType<ConnectionService>().As<IConnectionService>();
-
+            builder.RegisterType<ConnectionService>().As<IConnectionService>();   
+                 
             //General
             builder.RegisterType<NavigationService>().As<INavigationService>();
             builder.RegisterType<GenericRepository>().As<IGenericRepository>();

@@ -32,6 +32,11 @@
                SeparatorColor="Transparent" 
                CachingStrategy="RecycleElement"
                HasUnevenRows="True">
+                 <ListView.Header>
+                    <StackLayout>
+                       <Label HorizontalTextAlignment="Center" Text="{Binding ConnectionMessage}"/>
+                    </StackLayout>
+                </ListView.Header>
                 <ListView.Behaviors>
                     <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsWorking}"/>
                     <behaviors:EventToCommandBehavior 
@@ -58,7 +63,6 @@
                                             <ColumnDefinition Width="100" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        
                                         <ffimageloading:CachedImage 
                                             Grid.Row="0"
                                             HeightRequest="120" 
@@ -78,17 +82,19 @@
                                            Style="{StaticResource TitleStyle}"
                                            FontAttributes="Bold" />
                                         <Label 
-                                           Margin="6,0" x:Name="release" 
-                                           Grid.Row="1" Grid.Column="1" 
-                                           Text="{Binding Release_date,StringFormat='Release Date : {0:N}'}}"
-                                           VerticalTextAlignment="Center" 
+                                           Margin="6,0" 
+                                           x:Name="release" 
+                                           Grid.Row="1" 
+                                           Grid.Column="1" 
+                                           Text="{Binding Release_date,StringFormat='{0:MMMM d, yyyy}'}}"
                                            HorizontalTextAlignment="Start"
                                            FontSize="Small" TextColor="Gray" 
                                            FontAttributes="Bold" />
                                         <Label 
-                                           x:Name="genre" Grid.Row="2" 
-                                           Grid.Column="1" Text="{Binding GenresOut,StringFormat='Genre : {0:N}'}}" 
-                                           VerticalTextAlignment="Start" 
+                                           x:Name="genre"
+                                           Text="{Binding GenreMain}" 
+                                           Grid.Row="2" 
+                                           Grid.Column="1" 
                                            HorizontalTextAlignment="Start" 
                                            FontSize="Small" TextColor="Gray" 
                                            FontAttributes="Bold" />
@@ -108,7 +114,7 @@
                         <ActivityIndicator 
                             IsRunning="{Binding IsWorking}"
                             IsVisible="{Binding IsWorking}"
-                            Color="#2196F3" 
+                            Color="{StaticResource Roxo}" 
                             VerticalOptions="Center" 
                             HorizontalOptions="Center" />
                     </Grid>

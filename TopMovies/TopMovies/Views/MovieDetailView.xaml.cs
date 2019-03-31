@@ -7,17 +7,19 @@ namespace TopMovies.Views
 {
     public partial class MovieDetailView : ContentPage
     {
-
-
+        #region Attributtes
         private double width = 0;
         private double height = 0;
+        #endregion
+
 
         public MovieDetailView()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
 
-               
+
+        #region Methods
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height); //must be called
@@ -36,16 +38,18 @@ namespace TopMovies.Views
             if (width > height)
             {
                 // Landscape;
-                imageMovie.Aspect = Aspect.AspectFill;
-                imageMovie.Margin = new Thickness(0, 0, 0, 0);
+                ContentView.Margin = new Thickness(0, 0, 0, 0);
+                gridChildren.TranslationY = 10;
             }
             else
             {  // Portrait;
-                imageMovie.Aspect = Aspect.AspectFit;
-                imageMovie.Margin = new Thickness(0, -120, 0, 0);
+                gridChildren.TranslationY = -50;
+                ContentView.Margin = new Thickness(0, -70, 0, 0);
 
             }
         }
+        #endregion
+
     }
 }
 

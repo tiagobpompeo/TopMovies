@@ -7,17 +7,17 @@
              Title="Menu">
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="8*" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid 
+        <Grid BackgroundColor="{StaticResource Roxo}"
             Grid.Row="0">
-            <Image Source="icon.png" Aspect="AspectFill"></Image>
-            <Grid BackgroundColor="#444444" Opacity="0.8"/>
-            <Label Text="{Binding WelcomeText}" Style="{StaticResource MenuLabelStyle}"/>
+            <Image Source="ic_launcher.png" Aspect="AspectFit"></Image>
+            <Grid BackgroundColor="#444444" Opacity="0.7"/>
+            <Label Text="{Binding WelcomeText}" Margin="10" Style="{StaticResource MenuLabelStyle}"/>
         </Grid>
         <Grid Grid.Row="1">
-            <ListView ItemsSource="{Binding MenuItems}"  CachingStrategy="RecycleElement"
+            <ListView x:Name="list" ItemsSource="{Binding MenuItems}" BackgroundColor="WhiteSmoke" CachingStrategy="RecycleElement"
                 SeparatorVisibility="None" HasUnevenRows="True" >
                 <ListView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding MenuItemTappedCommand}"></behaviors:EventToCommandBehavior>

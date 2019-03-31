@@ -7,7 +7,7 @@ using System;
 
 namespace TopMovies.Services.BaseChacheService
 {
-    public class BaseService
+    public class BaseService : IBaseService
     {
         protected IBlobCache Cache;
 
@@ -52,9 +52,9 @@ namespace TopMovies.Services.BaseChacheService
             await Cache.InsertObject(key, value);
         }
 
-        public async Task InsertObjecItemsCache(Dictionary<string, string> dicionarioTodo)
+        public void InvalidateCache()
         {
-            await Cache.InsertObjects(dicionarioTodo);
+            throw new NotImplementedException();
         }
     }
 }
