@@ -1,6 +1,6 @@
 ## TopMovies
 
-TopMovies Mobile App made in Xamarin.Forms that makes use of The Movie Database (TMDb) API to demonstrate the possibilities of backend making use of a great variety of functionality.
+TopMovies Mobile App made in Xamarin.Forms that makes use of The Movie Database (TMDb) API to demonstrate the possibilities of backend making use of a great variety of functionality.This app was build as an [Enterprise](https://blog.xamarin.com/developing-enterprise-apps-using-xamarin-forms/) Mobile Application with Xamarin.Forms with the MVVM pattern, dependency injection, commanding, testing, and more.
 
 ### Platforms
 
@@ -39,11 +39,11 @@ TopMovies Mobile App made in Xamarin.Forms that makes use of The Movie Database 
 ## Packages Used:
 
 ### [Polly](https://www.nuget.org/packages/Polly)
-is a library that allows developers to express resilience and transient fault handling policies such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback in a fluent and thread-safe manner.
+is a library that allows developers to express resilience and transient fault handling policies such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback in a fluent and thread-safe manner. It was used in Generic Repository Class on App.
 
 ### [Akavache](https://www.nuget.org/packages/akavache)
-An asynchronous, persistent key-value store for desktop and mobile applications on .NET
+An asynchronous, persistent key-value store for desktop and mobile applications on .NET. It was used in Pages Home and Detail Page of that.
 
 ### [Autofac](https://www.nuget.org/packages/Autofac)
-Autofac is an IoC container for Microsoft .NET. It manages the dependencies between classes so that applications stay easy to change as they grow in size and complexity.
+Autofac is an IoC container for Microsoft .NET. It manages the dependencies between classes so that applications stay easy to change as they grow in size and complexity.It was used in all app.
 
