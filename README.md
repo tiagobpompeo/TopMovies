@@ -1,6 +1,6 @@
 ## TopMovies
 
-TopMovies Mobile App made in Xamarin.Forms that makes use of The Movie Database (TMDb) API to demonstrate the possibilities of backend making use of a great variety of functionality.This app was build as an [Enterprise](https://blog.xamarin.com/developing-enterprise-apps-using-xamarin-forms/) Mobile Application with Xamarin.Forms with the MVVM pattern, dependency injection, commanding, testing, and more.
+TopMovies Mobile App made in Xamarin.Forms that makes use of The Movie Database (TMDb) API to demonstrate the possibilities of backend making use of a great variety of functionality.This app was build as an [Enterprise](https://blog.xamarin.com/developing-enterprise-apps-using-xamarin-forms/) Mobile Application with the MVVM pattern, dependency injection, commanding, testing, and more.
 
 ### Platforms
 
