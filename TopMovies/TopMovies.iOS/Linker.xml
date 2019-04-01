@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<linker>
+    <assembly fullname="TopMovies">
+        <type fullname="TopMovies.*" />
+    </assembly>
+     <assembly fullname="Newtonsoft.Json">
+        <type fullname="Newtonsoft.Json.*" />
+    </assembly>
+    <assembly fullname="Akavache.Sqlite3">
+        <type fullname="Akavache.Sqlite3.*" />
+    </assembly>
+</linker>

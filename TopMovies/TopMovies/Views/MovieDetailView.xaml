@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="WhiteSmoke"
+             x:Class="TopMovies.Views.MovieDetailView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="OverviewStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Margin" Value="12, 0" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+            </Style>
+            <Style x:Key="DetailTitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Margin" Value="6, 0" />
+            </Style>
+            <Style x:Key="PlayStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="80" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Color x:Key="DurationColor">#666566</Color>
+            <Style x:Key="DurationTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource DurationColor}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Margin" Value="6, 0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Command="{Binding MyList}" Text="My List" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid 
+                Padding="0,0,0,25" 
+                BackgroundColor="Black">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ContentView 
+                    x:Name="ContentView" 
+                    Grid.Row="0" 
+                    BackgroundColor="Black">
+                   <ffimageloading:CachedImage 
+                        Grid.Row="0" 
+                        x:Name="imageMovie" 
+                        LoadingPlaceholder="movies_icon.png"
+                        Aspect="AspectFit"
+                        Source="{Binding MovieDetail.Backdrop_path,Converter={StaticResource BaseUrlImageBig}}" 
+                        Opacity=".8">
+                    </ffimageloading:CachedImage>
+                </ContentView>
+                <Grid 
+                    RowSpacing="20" 
+                    x:Name="gridChildren" 
+                    Grid.Row="1" 
+                    BackgroundColor="Black">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                          <Label 
+                            Grid.Row="0" 
+                            x:Name="Title"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding MovieDetail.Title}" 
+                            Style="{StaticResource DetailTitleStyle}" 
+                          />
+                          <Label 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            x:Name="Release"
+                            Text="{Binding MovieDetail.Release_date, Converter={StaticResource ReleaseDateConverter}}"
+                            Style="{StaticResource DurationTextStyle}" 
+                          />
+                         <Label 
+                            Grid.Row="1"
+                            HorizontalTextAlignment="Center"
+                            x:Name="Genres"
+                            FontSize="14" 
+                            Text="{Binding GenreMain}"
+                            Style="{StaticResource DetailTitleStyle}"
+                           />
+                          <Label 
+                            Grid.Row="2" 
+                            x:Name="OverviewTitle"
+                            Text="{Binding MovieDetail.Overview}"
+                            Style="{StaticResource OverviewStyle}" 
+                          />
+                          <Grid Grid.Row="3">
+                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                             </Grid.RowDefinitions>
+                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                                <Button 
+                                    Margin="0,25,0,0"
+                                    Grid.Column="0"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding AddListCommand}"
+                                    HorizontalOptions="Center"
+                                    Image="list" 
+                                    Style="{StaticResource PlayStyle}" 
+                                 />
+                                <Image 
+                                    x:Name="Play"
+                                    Margin="0,25,0,0" 
+                                    Grid.Column="1"
+                                    HorizontalOptions="Center"
+                                    Source="play" 
+                                    Style="{StaticResource PlayStyle}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ShakeButton_Clicked"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Button 
+                                    Margin="0,25,0,0"
+                                    BackgroundColor="Transparent"
+                                    Grid.Column="2"
+                                    HorizontalOptions="Center"
+                                    Image="rate" 
+                                    Command="{Binding LikeCommand}"
+                                    Style="{StaticResource PlayStyle}"
+                                 />
+                         </Grid> 
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

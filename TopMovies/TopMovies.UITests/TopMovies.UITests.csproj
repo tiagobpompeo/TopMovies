@@ -30,6 +30,12 @@
   <ItemGroup>
     <PackageReference Include="NUnit" Version="2.6.4" />
     <PackageReference Include="Xamarin.UITest" Version="2.2.4" />
+    <PackageReference Include="xunit">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Moq">
+      <Version>4.10.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TopMovies.iOS\TopMovies.iOS.csproj">
@@ -44,10 +50,20 @@
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\TopMovies\TopMovies.csproj">
+      <Project>{212A8647-CB7E-42A7-8568-4D5B46A13297}</Project>
+      <Name>TopMovies</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests.cs" />
     <Compile Include="AppInitializer.cs" />
+    <Compile Include="ViewModel\HomeViewModelTest.cs" />
+    <Compile Include="Mocks\MockUpComingService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+    <Folder Include="Mocks\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

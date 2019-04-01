@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:behaviors="clr-namespace:TopMovies.Behaviors;assembly=TopMovies" 
+             xmlns:local="clr-namespace:TopMovies"
+             xmlns:custom="clr-namespace:TopMovies.CustomControls" 
+             Title="{Binding Title}" 
+             BackgroundColor="WhiteSmoke"
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:templates="clr-namespace:TopMovies.Templates" 
+             x:Class="TopMovies.Views.HomeView">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.Platforms>
+                <On Platform="iOS" Value="0, 10, 0, 0" />
+                <On Platform="Android" Value="0, 10, 0, 0" />
+            </OnPlatform.Platforms>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <StackLayout>
+            <!--<SearchBar 
+                   x:Name="SearchBarMovies"
+                   Placeholder="Search items.." 
+                   SearchCommand="{Binding SearchCommand}"  
+                   Text="{Binding SearchText, Mode=TwoWay}" 
+                   SearchCommandParameter="{Binding Text, Source={x:Reference SearchBarMovies}}">
+                <SearchBar.Behaviors>
+                    <behaviors:EventToCommandBehavior 
+                        EventName="TextChanged" 
+                        Command="{Binding TextChangeInSearchCommand}"/>
+                </SearchBar.Behaviors>
+            </SearchBar>-->
+            <ListView 
+               x:Name="listView" 
+               ItemsSource="{Binding Movies}"
+               SeparatorColor="Transparent" 
+               CachingStrategy="RecycleElement"
+               HasUnevenRows="True">
+                 <ListView.Header>
+                    <StackLayout>
+                       <Label HorizontalTextAlignment="Center" Text="{Binding ConnectionMessage}"/>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.Behaviors>
+                    <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsWorking}"/>
+                    <behaviors:EventToCommandBehavior 
+                        EventName="ItemTapped" 
+                        Command="{Binding MovieTappedCommand}" 
+                        EventArgsConverter="{StaticResource LocalItemTappedConverter}">
+                    </behaviors:EventToCommandBehavior>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="12">
+                                <custom:FrameCustom 
+                                   Padding="0" 
+                                   VerticalOptions="Start"
+                                   HasShadow="{OnPlatform Android=true, iOS=false}">
+                                    <Grid Padding="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="25" />
+                                        </Grid.ColumnDefinitions>
+                                        <ffimageloading:CachedImage 
+                                            Grid.Row="0"
+                                            HeightRequest="120" 
+                                            LoadingPlaceholder="movies_icon.png"
+                                            WidthRequest="100"
+                                            Aspect="Fill" 
+                                            Grid.Column="0"
+                                            Grid.RowSpan="3"
+                                            Source="{Binding Poster_path, Converter={StaticResource BaseUrlImageSmall}}"
+                                        />
+                                        <Label 
+                                           x:Name="title" 
+                                           Grid.Row="0" 
+                                           Grid.Column="1"
+                                           Grid.ColumnSpan="2"
+                                           Margin="6,10,6,6" 
+                                           Text="{Binding Title}" 
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Start"
+                                           LineBreakMode="TailTruncation" 
+                                           Style="{StaticResource TitleStyle}"
+                                           FontAttributes="Bold" 
+                                        />
+                                         <Label 
+                                           x:Name="genre"
+                                           Margin="6,6,6,6"
+                                           Text="{Binding Genre_ids,StringFormat='Genre : {0:N}',Converter={StaticResource GenresTextConverter}}"
+                                           Grid.Row="1" 
+                                           Grid.Column="1" 
+                                           VerticalTextAlignment="End"
+                                           HorizontalTextAlignment="Start" 
+                                           FontSize="Small" TextColor="Gray" 
+                                           FontAttributes="Bold" 
+                                        />
+                                        <Label 
+                                           Margin="6,0,6,10" 
+                                           x:Name="release"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Start"  
+                                           Grid.Row="2" 
+                                           Grid.Column="1" 
+                                           Text="{Binding Release_date,StringFormat='{0:MMMM d, yyyy}'}}"
+                                           FontSize="Small" TextColor="Gray" 
+                                           FontAttributes="Bold" 
+                                        />
+                                        <Image
+                                            Margin="0,6,6,0" 
+                                            Grid.Column="2"
+                                            Grid.Row="0" 
+                                            Grid.RowSpan="3"
+                                            Source="seta.png" 
+                                            HeightRequest="25" 
+                                            WidthRequest="25">
+                                       </Image>
+                                        
+                                    </Grid>
+                                </custom:FrameCustom>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <Grid Padding="6" IsVisible="{Binding IsWorking}">
+                        <Grid.Triggers>
+                            <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                                <Setter Property="HeightRequest" Value="0" />
+                            </Trigger>
+                        </Grid.Triggers>
+                        <ActivityIndicator 
+                            IsRunning="{Binding IsWorking}"
+                            IsVisible="{Binding IsWorking}"
+                            Color="{StaticResource Roxo}" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="Center" 
+                        />
+                    </Grid>
+                </ListView.Footer>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
