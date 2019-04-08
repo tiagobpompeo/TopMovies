@@ -21,7 +21,6 @@ namespace TopMovies.Services.Navigation
         {
             _authenticationService = authenticationService;
             _mappings = new Dictionary<Type, Type>();
-
             CreatePageViewModelMappings();
         }
 
@@ -172,15 +171,16 @@ namespace TopMovies.Services.Navigation
             return page;
         }
 
-        //map to join VM and VIEW dont need ViewModel Locator!
+        //map to join VM and VIEW dont need ViewModel Locator others cases is resolve trought Utility.ViewModelLocator
         private void CreatePageViewModelMappings()
         {
             _mappings.Add(typeof(LoginViewModel), typeof(LoginView));
-            _mappings.Add(typeof(MainViewModel), typeof(MainView));
+            _mappings.Add(typeof(MainViewModel), typeof(MainView));//Master Detail
             _mappings.Add(typeof(RegistrationViewModel), typeof(RegisterView));
             _mappings.Add(typeof(MenuViewModel), typeof(MenuView));
             _mappings.Add(typeof(HomeViewModel), typeof(HomeView));
             _mappings.Add(typeof(MovieDetailViewModel), typeof(MovieDetailView));
+            _mappings.Add(typeof(NewPageViewModel), typeof(NewPage));
         }
     }
 }

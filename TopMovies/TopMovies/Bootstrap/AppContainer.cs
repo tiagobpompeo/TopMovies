@@ -27,6 +27,7 @@ namespace TopMovies.Bootstrap
             builder.RegisterType<MenuViewModel>();
             builder.RegisterType<RegistrationViewModel>();
             builder.RegisterType<MovieDetailViewModel>();
+            builder.RegisterType<NewPageViewModel>();
 
             //services - data
             builder.RegisterType<UpComingService>().As<IUpComing>();
@@ -50,6 +51,7 @@ namespace TopMovies.Bootstrap
             return _container.Resolve(typeName);
         }
 
+        //Resolve : casos em que eh necessario instancia, e nao ha injecao de dependencia no construtor(casos VM)
         public static T Resolve<T>()
         {
             return _container.Resolve<T>();

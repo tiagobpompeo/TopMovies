@@ -65,6 +65,13 @@ namespace TopMovies.ViewModels
                 MenuItemType = MenuItemType.MainPage
             });
 
+            MenuItems.Add(new MainMenuItem
+            {
+                MenuText = "New Page",
+                ViewModelToLoad = typeof(NewPageViewModel),
+                MenuItemType = MenuItemType.NewPage
+            });
+
 
         }
     }
