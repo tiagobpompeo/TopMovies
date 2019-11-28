@@ -24,6 +24,8 @@ namespace TopMovies.Services.UpComing
 
         public async Task<List<Movies.Result>> GetAllMoviesAsync(int page)
         {
+            Crashes.GenerateTestCrash();
+         
             List<Movies.Result> moviesFromCache = await GetFromCache<List<Movies.Result>>(page.ToString());
             if (moviesFromCache != null)//loaded from cache
             {
@@ -31,7 +33,7 @@ namespace TopMovies.Services.UpComing
             }
             else
             {
-                Crashes.GenerateTestCrash();
+                                  
 
                 string uri = $"{ApiConstants.BaseApiUrl}upcoming?api_key={ApiConstants.Api_key}&language=en-us&page={page}";
                 var movies = await _genericRepository.GetAsync<Movies>(uri);
