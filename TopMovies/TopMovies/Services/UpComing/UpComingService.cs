@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Akavache;
+using Microsoft.AppCenter.Crashes;
 using TopMovies.Constants;
 using TopMovies.Detail;
 using TopMovies.Helpers;
@@ -30,6 +31,8 @@ namespace TopMovies.Services.UpComing
             }
             else
             {
+                Crashes.GenerateTestCrash();
+
                 string uri = $"{ApiConstants.BaseApiUrl}upcoming?api_key={ApiConstants.Api_key}&language=en-us&page={page}";
                 var movies = await _genericRepository.GetAsync<Movies>(uri);
                 GeneralVar.TotalPages = movies.Total_pages;//count
