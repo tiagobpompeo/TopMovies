@@ -4,7 +4,7 @@ TopMovies Mobile App made in Xamarin.Forms that makes use of The Movie Database 
 
 ### Platforms
 
- - Android(Api 21+), iOS(10.3+).
+ - Android(Api 21+), iOS(10.3+)...
 
 ### Features:
 
